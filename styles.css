@@ -1,0 +1,86 @@
+*{  
+    padding: 0px;
+    margin: 0px;
+    background-color: #F2F2F2;
+    color :#FFFFFF;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    
+}
+
+.container{
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator-box{
+    height: 80vh;
+    width:40vw;
+    background-color: #1C1C1E;
+    padding: 20px;
+    border-radius: 5%;
+    display: flex;
+    flex-direction: column;
+}
+
+.calculator-box div{
+    background-color: #1C1C1E;
+    color: #FFFFFF
+}
+
+.result{
+    flex:1;
+    width: 100%;
+    font-size:6vw;
+    height: 8vw;
+    padding: 10px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.buttons{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+}
+
+.buttons div{
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    display: flex;
+    gap:15px;
+}
+
+.buttons div button{
+    flex:1;
+}
+
+.buttons div .zero{
+    flex:2;
+}
+
+button{
+    font-size: 2vw;
+    width: 6vw;
+    height:4vw;
+    background-color: #2C2C2E;
+    border-radius:4em;
+    border:none;
+    cursor: pointer;
+}
+
+.operator-bttn{
+    background-color: #FF9500;
+}
+
+.special-bttn{
+    background-color: #878789;
+}
