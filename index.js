@@ -29,16 +29,38 @@ function clearScreen(){
     operatorOn = false;
 }
 
+function handleSpecialButtons(e){
+    if(e.target.textContent === 'AC'){
+        clearScreen();
+    } 
+    else if (e.target.textContent === '='){
+        dispatch(a,op,b);
+        output.textContent = res;
+    } 
+    else if (e.target.textContent === '←'){
+        let s = calc.textContent;
+        let removed = s.substring(s.length-1);
+        s = s.substring(0,s.length-1);
+        calc.textContent = s;
+        
+        if(removed===op){
+            op = '';
+            operatorOn = false;
+        }else if(b){ 
+            b = b.substring(0,b.length-1)}
+        else {a = a.substring(0,a.length-1)};
+    }
+}
+
 function handleButtons(e){
     if(e.target.className === 'standard-bttn'){
         if(!operatorOn){
             a += e.target.textContent;
-            output.textContent = a;
+            output.textContent = '';
             calc.textContent = a;
         }else{
             b += e.target.textContent;
             calc.append(b);
-            dispatch(a,op,b);
         }
     } else if(e.target.className === 'operator-bttn'){
         op = e.target.textContent;
