@@ -12,7 +12,22 @@ function calculation(a,op,b){
     }
 }
 
+function dispatch(a,op,b){
+    a = Number(a)
+    b = Number(b)
+    res = calculation(a,op,b);
+    output.textContent = '';
+    output.append(res);
+}
 
+function clearScreen(){
+    output.textContent='';
+    calc.textContent= '';
+    a='';
+    b='';
+    res=0;
+    operatorOn = false;
+}
 
 function handleButtons(e){
     if(e.target.className === 'standard-bttn'){
@@ -30,9 +45,7 @@ function handleButtons(e){
         calc.append(op);
         operatorOn = true;
     } else{
-        if(e.target.textContent === 'AC'){
-            clearScreen();
-        }
+        handleSpecialButtons(e);
     }
 }
 
