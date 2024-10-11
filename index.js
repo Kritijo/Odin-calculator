@@ -34,8 +34,14 @@ function handleSpecialButtons(e){
         clearScreen();
     } 
     else if (e.target.textContent === '='){
+        if(!op) {
+            return output.textContent = a
+        };
         dispatch(a,op,b);
         output.textContent = res;
+        a = res;
+        b = '';
+        op = '';
     } 
     else if (e.target.textContent === '←'){
         let s = calc.textContent;
@@ -60,11 +66,12 @@ function handleButtons(e){
             calc.textContent = a;
         }else{
             b += e.target.textContent;
-            calc.append(b);
+            calc.textContent = `${a} ${op} ${b}`;
         }
     } else if(e.target.className === 'operator-bttn'){
         op = e.target.textContent;
         calc.append(op);
+        calc.textContent = `${a} ${op} ${b}`;
         operatorOn = true;
     } else{
         handleSpecialButtons(e);
