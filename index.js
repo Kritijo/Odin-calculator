@@ -1,6 +1,7 @@
 let operatorOn = false;
 let a='', b='', op='', res=0;
-const display = document.querySelector(".result");
+const output = document.querySelector(".output");
+const calc = document.querySelector(".calc");
 
 function calculation(a,op,b){
     switch(op){
@@ -17,13 +18,16 @@ function handleButtons(e){
     if(e.target.className === 'standard-bttn'){
         if(!operatorOn){
             a += e.target.textContent;
-            display.textContent = a;
+            output.textContent = a;
+            calc.textContent = a;
         }else{
             b += e.target.textContent;
+            calc.append(b);
             dispatch(a,op,b);
         }
     } else if(e.target.className === 'operator-bttn'){
         op = e.target.textContent;
+        calc.append(op);
         operatorOn = true;
     } else{
         if(e.target.textContent === 'AC'){
