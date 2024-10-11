@@ -11,3 +11,29 @@ function calculation(a,op,b){
     }
 }
 
+
+
+function handleButtons(e){
+    if(e.target.className === 'standard-bttn'){
+        if(!operatorOn){
+            a += e.target.textContent;
+            display.textContent = a;
+        }else{
+            b += e.target.textContent;
+            dispatch(a,op,b);
+        }
+    } else if(e.target.className === 'operator-bttn'){
+        op = e.target.textContent;
+        operatorOn = true;
+    } else{
+        if(e.target.textContent === 'AC'){
+            clearScreen();
+        }
+    }
+}
+
+function mouseClick(){
+    document.addEventListener("click",(e)=>handleButtons(e));
+}
+
+mouseClick();
