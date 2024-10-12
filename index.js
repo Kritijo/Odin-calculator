@@ -8,7 +8,8 @@ function calculation(a,op,b){
         case '+': return a+b;
         case '–': return a-b;
         case '×': return a*b; 
-        case '÷': return a/b;
+        case '÷': return Number.parseFloat(a/b).toFixed(5);
+        case '%': return a%b;
     }
 }
 
@@ -27,6 +28,25 @@ function clearScreen(){
     b='';
     res=0;
     operatorOn = false;
+}
+
+function handleNumbers(e){
+    if(!operatorOn){
+        a += e;
+        output.textContent = '';
+        calc.textContent = a;
+    }
+    else{
+        b += e;
+        calc.textContent = `${a} ${op} ${b}`;
+    }
+}
+
+function handleOperators(e){
+    op = e;
+    calc.append(op);
+    calc.textContent = `${a} ${op} ${b}`;
+    operatorOn = true;
 }
 
 function handleSpecialButtons(e){
@@ -49,7 +69,10 @@ function handleSpecialButtons(e){
         s = s.substring(0,s.length-1);
         calc.textContent = s;
         
-        if(removed===op){
+        if(res){
+            calc.textContent='';
+        }
+        else if(removed===op){
             op = '';
             operatorOn = false;
         }else if(b){ 
@@ -60,19 +83,9 @@ function handleSpecialButtons(e){
 
 function handleButtons(e){
     if(e.target.className === 'standard-bttn'){
-        if(!operatorOn){
-            a += e.target.textContent;
-            output.textContent = '';
-            calc.textContent = a;
-        }else{
-            b += e.target.textContent;
-            calc.textContent = `${a} ${op} ${b}`;
-        }
+        handleNumbers(e.target.textContent);
     } else if(e.target.className === 'operator-bttn'){
-        op = e.target.textContent;
-        calc.append(op);
-        calc.textContent = `${a} ${op} ${b}`;
-        operatorOn = true;
+        handleOperators(e.target.textContent);
     } else{
         handleSpecialButtons(e);
     }
