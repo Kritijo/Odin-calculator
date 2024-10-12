@@ -8,7 +8,7 @@ function calculation(a,op,b){
         case '+': return a+b;
         case '-': return a-b;
         case '*': return a*b; 
-        case '/': return Number.parseFloat(a/b).toFixed(5);
+        case '/': return Number.parseFloat(a/b).toFixed(2);
         case '%': return a%b;
     }
 }
@@ -98,9 +98,10 @@ function mouseClick(){
 mouseClick();
 
 function handleKeys(e){
+    let validOp = ['+','-','*','/','%']; 
     if(isFinite(e)){
         handleNumbers(e);
-    } else if(e === '+' || e==='-' || e === '*' || e === '/'){
+    } else if(validOp.includes(e)){
         handleOperators(e)
     } else{
         handleSpecialButtons(e);

@@ -15,11 +15,15 @@ body{
 }
 
 .calculator-box{
-    height: 80vh;
-    width:40vw;
+    max-height:700px;
+    max-width:600px;
+    height:700px;
+    width:600px;
+    min-height:500px;
+    min-width:320px;
     background-color: #1C1C1E;
     padding: 20px;
-    border-radius: 5%;
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
 }
