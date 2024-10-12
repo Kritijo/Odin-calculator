@@ -17,7 +17,17 @@ function calculation(a,op,b){
 function dispatch(a,op,b){
     a = Number(a);
     b = Number(b);
-    res = calculation(a,op,b).toFixed(3);
+    res = calculation(a,op,b);
+
+    res = res % 1 != 0 ? res.toFixed(3) : res;
+    
+    if(res.toString().length>17){
+        res = res.toString().substring(0, 10)+'...';
+        output.textContent = '';
+        output.append(res);
+        res = Number(res.substring(0,10));
+        return;
+    }
     output.textContent = '';
     output.append(res);
 }
