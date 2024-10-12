@@ -6,9 +6,9 @@ const calc = document.querySelector(".calc");
 function calculation(a,op,b){
     switch(op){
         case '+': return a+b;
-        case '–': return a-b;
-        case '×': return a*b; 
-        case '÷': return Number.parseFloat(a/b).toFixed(5);
+        case '-': return a-b;
+        case '*': return a*b; 
+        case '/': return Number.parseFloat(a/b).toFixed(5);
         case '%': return a%b;
     }
 }
@@ -50,10 +50,10 @@ function handleOperators(e){
 }
 
 function handleSpecialButtons(e){
-    if(e.target.textContent === 'AC'){
+    if(e === 'AC' || e === 'c'){
         clearScreen();
     } 
-    else if (e.target.textContent === '='){
+    else if (e === '=' || e === 'Enter'){
         if(!op) {
             return output.textContent = a
         };
@@ -63,7 +63,7 @@ function handleSpecialButtons(e){
         b = '';
         op = '';
     } 
-    else if (e.target.textContent === '←'){
+    else if (e === '←' || e === 'Backspace'){
         let s = calc.textContent;
         let removed = s.substring(s.length-1);
         s = s.substring(0,s.length-1);
@@ -87,7 +87,7 @@ function handleButtons(e){
     } else if(e.target.className === 'operator-bttn'){
         handleOperators(e.target.textContent);
     } else{
-        handleSpecialButtons(e);
+        handleSpecialButtons(e.target.textContent);
     }
 }
 
@@ -96,3 +96,19 @@ function mouseClick(){
 }
 
 mouseClick();
+
+function handleKeys(e){
+    if(isFinite(e)){
+        handleNumbers(e);
+    } else if(e === '+' || e==='-' || e === '*' || e === '/'){
+        handleOperators(e)
+    } else{
+        handleSpecialButtons(e);
+    }
+}
+
+function keyPress(){
+    document.addEventListener("keydown",(e)=> handleKeys(e.key));
+}
+
+keyPress();
