@@ -21,7 +21,7 @@ function dispatch(a,op,b){
 
     res = res % 1 != 0 ? res.toFixed(3) : res;
     
-    if(res.toString().length>17){
+    if(res.toString().length>10){
         res = res.toString().substring(0, 10)+'...';
         output.textContent = '';
         output.append(res);
