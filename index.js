@@ -10,6 +10,7 @@ function calculation(a,op,b){
         case '*': return a*b; 
         case '/': return Number.parseFloat(a/b).toFixed(2);
         case '%': return a%b;
+        default: return a;
     }
 }
 
@@ -50,34 +51,37 @@ function handleOperators(e){
 }
 
 function handleSpecialButtons(e){
-    if(e === 'AC' || e === 'c'){
-        clearScreen();
-    } 
-    else if (e === '=' || e === 'Enter'){
-        if(!op) {
-            return output.textContent = a
-        };
-        dispatch(a,op,b);
-        output.textContent = res;
-        a = res;
-        b = '';
-        op = '';
-    } 
-    else if (e === '←' || e === 'Backspace'){
-        let s = calc.textContent;
-        let removed = s.substring(s.length-1);
-        s = s.substring(0,s.length-1);
-        calc.textContent = s;
-        
-        if(res){
-            calc.textContent='';
-        }
-        else if(removed===op){
+    switch(e){
+        case 'AC':
+        case 'c':
+            clearScreen();
+            break;
+
+        case '=':
+        case 'Enter':
+            dispatch(a,op,b);
+            a = res;
+            b = '';
             op = '';
-            operatorOn = false;
-        }else if(b){ 
-            b = b.substring(0,b.length-1)}
-        else {a = a.substring(0,a.length-1)};
+            break;
+            
+        case '←':
+        case 'Backspace':
+            let s = calc.textContent;
+            let removed = s.substring(s.length-1);
+            calc.textContent = calc.textContent.substring(0,calc.textContent.length-1);
+            
+            if(res){
+                calc.textContent='';
+                b = '';
+            }
+            else if(removed===op){
+                op = '';
+                operatorOn = false;
+            }else if(b){ 
+                b = b.substring(0,b.length-1)}
+            else {a = a.substring(0,a.length-1)};
+            break;
     }
 }
 
