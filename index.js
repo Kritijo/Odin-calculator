@@ -8,16 +8,16 @@ function calculation(a,op,b){
         case '+': return a+b;
         case '-': return a-b;
         case '*': return a*b; 
-        case '/': return Number.parseFloat(a/b).toFixed(2);
+        case '/': return a/b;
         case '%': return a%b;
         default: return a;
     }
 }
 
 function dispatch(a,op,b){
-    a = Number(a)
-    b = Number(b)
-    res = calculation(a,op,b);
+    a = Number(a);
+    b = Number(b);
+    res = calculation(a,op,b).toFixed(3);
     output.textContent = '';
     output.append(res);
 }
@@ -32,10 +32,25 @@ function clearScreen(){
 }
 
 function handleNumbers(e){
-    if(!operatorOn){
+    if (e==='.'){
+        if(!operatorOn){
+            if (a.includes('.')){
+                return;
+            }
+            a+=e;
+            calc.textContent = `${a}`;
+        } else{
+            if (b.includes('.')){
+                return;
+            }
+            b+=e;
+            calc.textContent = `${a} ${op} ${b}`;
+        }
+    }
+    else if(!operatorOn){
         a += e;
         output.textContent = '';
-        calc.textContent = a;
+        calc.textContent = `${a}`;
     }
     else{
         b += e;
@@ -103,7 +118,7 @@ mouseClick();
 
 function handleKeys(e){
     let validOp = ['+','-','*','/','%']; 
-    if(isFinite(e)){
+    if(isFinite(e) || e === '.'){
         handleNumbers(e);
     } else if(validOp.includes(e)){
         handleOperators(e)
